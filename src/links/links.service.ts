@@ -1,16 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Link } from './link.entity';
-import { LinksRepository } from './links.repository';
 
 @Injectable()
 export class LinksService {
   constructor(
-    @InjectRepository(LinksRepository)
-    private readonly linksRepository: LinksRepository,
+    @InjectRepository(Link)
+    private readonly linkRepository: Repository<Link>, // Use TypeORM's Repository
   ) {}
 
-  async getAllLinks(): Promise<Array<Link>> {
-    return this.linksRepository.find({});
+  async getAllLinks(): Promise<Link[]> {
+    return this.linkRepository.find(); // Use the default repository methods
+  }
+
+  async createLink(name: string, url: string): Promise<Link> {
+    const link = this.linkRepository.create({ name, url });
+    await this.linkRepository.save(link);
+    return link;
   }
 }

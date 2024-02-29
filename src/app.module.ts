@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
 import { LinksModule } from './links/links.module';
-
+// import { Link } from './links/link.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
