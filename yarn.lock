@@ -381,6 +381,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.0.tgz#a5417ae8427873f1dd08b70b3574b453e67b5f7f"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
+"@faker-js/faker@^8.4.1":
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.4.1.tgz#5d5e8aee8fce48f5e189bf730ebd1f758f491451"
+  integrity sha512-XQ3cU+Q8Uqmrbf2e0cIC/QN43sTBSC8KF12u29Mb47tWrt2hAgBXSgpZMj4Ao8Uk0iJcU99QsOCaIL8934obCg==
+
 "@hapi/hoek@^9.0.0", "@hapi/hoek@^9.3.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"
@@ -773,7 +778,7 @@
     jsonc-parser "3.2.1"
     pluralize "8.0.0"
 
-"@nestjs/testing@^10.0.0":
+"@nestjs/testing@^10.3.3":
   version "10.3.3"
   resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-10.3.3.tgz#09924fca887dc5c9020feff1414da69f5bce30ac"
   integrity sha512-kX20GfjAImL5grd/i69uD/x7sc00BaqGcP2dRG3ilqshQUuy5DOmspLCr3a2C8xmVU7kzK4spT0oTxhe6WcCAA==
@@ -4784,7 +4789,7 @@ superagent@^8.1.2:
     qs "^6.11.0"
     semver "^7.3.8"
 
-supertest@^6.3.3:
+supertest@^6.3.4:
   version "6.3.4"
   resolved "https://registry.yarnpkg.com/supertest/-/supertest-6.3.4.tgz#2145c250570c2ea5d337db3552dbfb78a2286218"
   integrity sha512-erY3HFDG0dPnhw4U+udPfrzXa4xhSG+n4rxfRuZWCUvjFWwKl+OxWf/7zk50s84/fAAs7vf5QAb9uRa0cCykxw==
