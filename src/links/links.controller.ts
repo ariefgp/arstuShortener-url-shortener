@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { LinksService } from './links.service';
 import { Link } from './link.entity';
+import { CreateLinkDto } from './dto/create-link.dto';
 
 @Controller('links')
 export class LinksController {
@@ -19,11 +20,8 @@ export class LinksController {
   }
 
   @Post()
-  createLink(
-    @Body('name') name: string,
-    @Body('url') url: string,
-  ): Promise<Link> {
-    return this.linksService.createLink(name, url);
+  createLink(@Body() createLinkDto: CreateLinkDto): Promise<Link> {
+    return this.linksService.createLink(createLinkDto);
   }
 
   @Get('/:shortenedUrl')

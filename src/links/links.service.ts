@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Link } from './link.entity';
+import { CreateLinkDto } from './dto/create-link.dto';
 
 @Injectable()
 export class LinksService {
@@ -14,7 +15,8 @@ export class LinksService {
     return this.linkRepository.find(); // Use the default repository methods
   }
 
-  async createLink(name: string, url: string): Promise<Link> {
+  async createLink(createLinkDto: CreateLinkDto): Promise<Link> {
+    const { name, url } = createLinkDto;
     const link = this.linkRepository.create({ name, url });
     await this.linkRepository.save(link);
     return link;
