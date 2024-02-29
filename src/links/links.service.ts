@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Link } from './link.entity';
@@ -18,7 +23,15 @@ export class LinksService {
   async createLink(createLinkDto: CreateLinkDto): Promise<Link> {
     const { name, url } = createLinkDto;
     const link = this.linkRepository.create({ name, url });
-    await this.linkRepository.save(link);
+    try {
+      await this.linkRepository.save(link);
+    } catch (err) {
+      if (err.code === '23505') {
+        throw new ConflictException('Short name already exists');
+      } else {
+        throw new InternalServerErrorException();
+      }
+    }
     return link;
   }
 
@@ -31,7 +44,7 @@ export class LinksService {
   async getOriginalUrl(shortenedUrl: string): Promise<string> {
     const link = await this.findByShortenedUrl(shortenedUrl);
     if (!link) {
-      throw new Error('Shortened URL not found');
+      throw new NotFoundException('Shortened URL not found');
     }
     return link.url;
   }
