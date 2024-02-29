@@ -4,11 +4,13 @@ import {
   Get,
   Post,
   Param,
+  Res,
   NotFoundException,
 } from '@nestjs/common';
 import { LinksService } from './links.service';
 import { Link } from './link.entity';
 import { CreateLinkDto } from './dto/create-link.dto';
+import { Response } from 'express';
 
 @Controller('links')
 export class LinksController {
@@ -27,11 +29,12 @@ export class LinksController {
   @Get('/:shortenedUrl')
   async redirectToOriginalUrl(
     @Param('shortenedUrl') shortenedUrl: string,
-  ): Promise<{ url: string }> {
+    @Res() res: Response,
+  ) {
     const originalUrl = await this.linksService.getOriginalUrl(shortenedUrl);
     if (!originalUrl) {
       throw new NotFoundException('Shortened URL not found');
     }
-    return { url: originalUrl }; // This can be a redirect or simply returning the URL
+    res.redirect(301, originalUrl);
   }
 }
