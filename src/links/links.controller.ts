@@ -6,6 +6,7 @@ import {
   Param,
   Res,
   NotFoundException,
+  Delete,
 } from '@nestjs/common';
 import { LinksService } from './links.service';
 import { Link } from './link.entity';
@@ -36,5 +37,11 @@ export class LinksController {
       throw new NotFoundException('Shortened URL not found');
     }
     res.redirect(301, originalUrl);
+  }
+
+  @Delete('/:id')
+  async deleteLink(@Param('id') id: string) {
+    await this.linksService.deleteLink(id);
+    return { message: 'Link deleted successfully' };
   }
 }

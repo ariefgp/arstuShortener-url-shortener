@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Link } from './link.entity';
@@ -34,5 +34,12 @@ export class LinksService {
       throw new Error('Shortened URL not found');
     }
     return link.url;
+  }
+
+  async deleteLink(id: string): Promise<void> {
+    const result = await this.linkRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Link with ID "${id}" not found`);
+    }
   }
 }
