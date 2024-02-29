@@ -19,4 +19,18 @@ export class LinksService {
     await this.linkRepository.save(link);
     return link;
   }
+
+  async findByShortenedUrl(shortenedUrl: string): Promise<Link> {
+    return this.linkRepository.findOne({
+      where: { name: shortenedUrl },
+    });
+  }
+
+  async getOriginalUrl(shortenedUrl: string): Promise<string> {
+    const link = await this.findByShortenedUrl(shortenedUrl);
+    if (!link) {
+      throw new Error('Shortened URL not found');
+    }
+    return link.url;
+  }
 }
